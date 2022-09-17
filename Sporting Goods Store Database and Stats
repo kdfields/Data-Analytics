@@ -1,0 +1,34 @@
+**Create a sporting goods store database.**
+
+CREATE TABLE sporting_goods (id INTEGER PRIMARY KEY, item text, quantity integer, price integer, season text);
+
+INSERT INTO sporting_goods VALUES (1, "baseball glove", 6, 29.99, "summer");
+INSERT INTO sporting_goods VALUES (2, "football", 14, 14.99, "fall");
+INSERT INTO sporting_goods VALUES (3, "wrist brace", 8, 6.99, "all season");
+INSERT INTO sporting_goods VALUES (4, "hockey stick", 2, 14.99, "winter");
+INSERT INTO sporting_goods VALUES (5, "soccer ball", 4, 17.99, "spring");
+INSERT INTO sporting_goods VALUES (6, "batting gloves", 13, 9.99, "summer");
+INSERT INTO sporting_goods VALUES (7, "athletic tape", 23, 7.99, "all season");
+INSERT INTO sporting_goods VALUES (8, "football gloves", 27, 14.99, "fall");
+INSERT INTO sporting_goods VALUES (9, "football cleats", 21, 64.99, "fall");
+INSERT INTO sporting_goods VALUES (10, "hockey puck", 37, 9.99, "winter");
+INSERT INTO sporting_goods VALUES (11, "soccer cleats", 3, 49.99, "spring");
+INSERT INTO sporting_goods VALUES (12, "mouth guard", 28, 9.99, "all season");
+INSERT INTO sporting_goods VALUES (13, "baseball cleats", 14, 59.99, "summer" );
+INSERT INTO sporting_goods VALUES (14, "knee brace", 18, 12.99, "all season");
+INSERT INTO sporting_goods VALUES (15, "basketball", 11, 19.99, "spring" );
+
+**Display the database ordered by price.**
+SELECT * FROM sporting_goods
+ORDER BY price;
+
+**Display the name, quantity, and price ordered by quantity.**
+SELECT item, quantity, price FROM sporting_goods
+ORDER BY quantity;
+
+**Display the average price of all the items.**
+SELECT AVG(price) FROM sporting_goods;
+
+**Display the average price of spring and summer items.** 
+SELECT AVG(price) FROM sporting_goods
+WHERE season = "spring" OR season = "summer"; 
