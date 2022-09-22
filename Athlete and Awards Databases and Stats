@@ -1,0 +1,79 @@
+/* Created table about athletes and which sport they play.*/
+
+CREATE TABLE athletes (id INTEGER PRIMARY KEY, name TEXt, sport TEXT);
+
+INSERT INTO athletes VALUES
+    (1, "Tom Brady", "football");
+INSERT INTO athletes VALUES
+    (2, "Serena Williams", "tennis");
+INSERT INTO athletes VALUES
+    (3, "Lebron James", "baseketball");
+INSERT INTO athletes VALUES
+    (4, "Aaron Rodgers", "football");
+INSERT INTO ATHLETES VALUES
+    (5, "Giannis Antetokounmpo", "basketball");
+
+/*Created table about Player of the Year awards*/
+
+CREATE TABLE awards (id INTEGER PRIMARY KEY, name TEXT, athlete_id INTEGER, year INTEGER);
+
+INSERT INTO awards VALUES
+    (1, "WTA Player of the Year", 2, 2008);
+INSERT INTO awards VALUES
+    (2, "WTA Player of the Year", 2, 2009);
+INSERT INTO awards VALUES
+    (3, "WTA Player of the Year", 2, 2012);
+INSERT INTO awards VALUES
+    (4, "WTA Player of the Year", 2, 2013);
+INSERT INTO awards VALUES
+    (5, "WTA Player of the Year", 2, 2014);
+INSERT INTO awards VALUES
+    (6, "WTA Player of the Year", 2, 2015);
+INSERT INTO awards VALUES
+    (7, "NFL MVP", 1, 2007);
+INSERT INTO awards VALUES
+    (8, "NFL MVP", 1, 2010);
+INSERT INTO awards VALUES
+    (9, "NFL MVP", 1, 2017);
+INSERT INTO awards VALUES
+    (10, "NFL MVP", 4, 2011);
+INSERT INTO awards VALUES
+    (11, "NFL MVP", 4, 2014);
+INSERT INTO awards VALUES
+    (12, "NFL MVP", 4, 2020);
+INSERT INTO awards VALUES
+    (13, "NFL MVP", 4, 2021);
+INSERT INTO awards VALUES
+    (14, "NBA MVP", 3, 2009);
+INSERT INTO awards VALUES
+    (15, "NBA MVP", 3, 2010);
+INSERT INTO awards VALUES
+    (16, "NBA MVP", 3, 2012);
+INSERT INTO awards VALUES
+    (17, "NBA MVP", 3, 2013);
+INSERT INTO awards VALUES
+    (18, "NBA MVP", 5, 2019);
+INSERT INTO awards VALUES
+    (19, "NBA MVP", 5, 2020);
+
+/* Joined two tables to display athletes and their awards.*/
+SELECT athletes.name as Athlete, awards.name as Award
+    FROM athletes
+    JOIN awards
+    ON athletes.id = awards.athlete_id;
+ 
+/*Joined two tables to display athletes and the years they won their awards.*/
+SELECT athletes.name as Athlete, awards.year as Award_Year
+    FROM athletes
+    JOIN awards
+    ON athletes.id = awards.athlete_id;
+
+/*Joined two tables to display the amount of awards each athlete has won.*/
+SELECT athletes.name AS Athlete, COUNT(athlete_id) AS POY_Awards
+    FROM athletes
+    JOIN awards
+    ON athletes.id = awards.athlete_id
+    GROUP BY Athlete
+    ORDER BY POY_Awards desc;
+    
+    
