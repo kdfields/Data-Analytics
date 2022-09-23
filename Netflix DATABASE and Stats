@@ -1,6 +1,10 @@
-/*Join two tables to display information about Netflix titles*/
+/*Join two tables to display information about Netflix titles.*/
 SELECT people.show_id, titles.title, titles.type, people.director, titles.rating
 FROM "CharlotteChaze/BreakIntoTech"."netflix_people" as people
 LEFT JOIN "CharlotteChaze/BreakIntoTech"."netflix_titles_info" as titles
 ON people.show_id = titles.show_id;
 
+/*Display the most recent batch of movies released on Netflix.*/
+SELECT titles.title, titles.date_added
+FROM "CharlotteChaze/BreakIntoTech"."netflix_titles_info" as titles
+LIMIT 25;
