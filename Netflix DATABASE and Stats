@@ -8,3 +8,8 @@ ON people.show_id = titles.show_id;
 SELECT titles.title, titles.date_added
 FROM "CharlotteChaze/BreakIntoTech"."netflix_titles_info" as titles
 LIMIT 25;
+
+/*Display movies titles in alphabetical order.*/
+SELECT titles.title
+FROM "CharlotteChaze/BreakIntoTech"."netflix_titles_info" as titles
+ORDER BY title ASC;
