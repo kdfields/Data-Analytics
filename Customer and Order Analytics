@@ -1,0 +1,33 @@
+#In this SQL, I'm querying a database with multiple tables in it to quantify statistics about customer and order data. 
+
+/*Display how many orders were made in January.*/
+SELECT COUNT(orderID) FROM BIT_DB.JanSales;
+
+/*Display how many January orders were iPhones.*/
+SELECT COUNT(Product) FROM BIT_DB.JanSales
+WHERE Product = "iPhone";
+
+/*Display the customer account numbers for all February orders.*/
+SELECT acctnum FROM BIT_DB.customers
+INNER JOIN BIT_DB.FebSales
+ON BIT_DB.customers.order_id = BIT_DB.FebSales.orderID;
+
+/*Display the price and name of the cheapest product sold in January.*/
+SELECT distinct product, min(price) as min_price FROM BIT_DB.JanSales
+GROUP BY Product
+ORDER BY min_price;
+
+/*Display the total revenue for each product sold in January.*/
+SELECT sum(quantity)*price as revenue, Product FROM BIT_DB.JanSales
+GROUP BY Product;
+
+/*Display which products were sold and total revenue for a specific address in February.*/
+SELECT product, Sum(Quantity) as Quantity, SUM(quantity)*price as total_revenue FROM BIT_DB.FebSales 
+WHERE location = "548 Lincoln St, Seattle, WA 98101"
+GROUP BY Product;
+
+/*Display the number of customers who bought 2+ items in February, and the average spent per purchase.*/
+SELECT COUNT(customers.acctnum) AS Feb_customers_2_or_more_orders, ROUND(AVG(quantity*price), 2) AS AVG_SPENT FROM BIT_DB.FebSales
+LEFT JOIN BIT_DB.customers     
+ON BIT_DB.FebSales.orderID = BIT_DB.customers.order_id
+WHERE Quantity >= 2;
