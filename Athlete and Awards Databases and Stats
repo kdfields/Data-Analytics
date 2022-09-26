@@ -1,4 +1,4 @@
-/* Created table about athletes and which sport they play.*/
+/* Create table about athletes and which sport they play.*/
 
 CREATE TABLE athletes (id INTEGER PRIMARY KEY, name TEXt, sport TEXT);
 
@@ -13,7 +13,7 @@ INSERT INTO athletes VALUES
 INSERT INTO ATHLETES VALUES
     (5, "Giannis Antetokounmpo", "basketball");
 
-/*Created table about Player of the Year awards*/
+/*Create table about Player of the Year awards*/
 
 CREATE TABLE awards (id INTEGER PRIMARY KEY, name TEXT, athlete_id INTEGER, year INTEGER);
 
