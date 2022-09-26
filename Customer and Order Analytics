@@ -31,3 +31,9 @@ SELECT COUNT(customers.acctnum) AS Feb_customers_2_or_more_orders, ROUND(AVG(qua
 LEFT JOIN BIT_DB.customers     
 ON BIT_DB.FebSales.orderID = BIT_DB.customers.order_id
 WHERE Quantity >= 2;
+
+/*Display the product name and quantity for all sales in Los Angeles in February.*/
+SELECT Product, Sum(Quantity) AS Quantity FROM BIT_DB.FebSales
+WHERE location like "%Los Angeles%"
+Group by Product
+ORDER BY Quantity desc;
