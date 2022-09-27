@@ -27,3 +27,33 @@ time_signature integer NOT NULL
 #Then I inserted the Spotify Data .csv into the table.
 
 #Next, I explored the data using the following SQL. 
+
+/*Display the average "danceability" by Artist.*/
+SELECT artist_name as Artist, AVG(danceability) as Danceability from BIT_DB.Spotifydata
+GROUP BY artist_name
+ORDER BY Danceability desc;
+
+/*Display the 10 Most Popular Artists.*/
+SELECT artist_name as Artist, AVG(popularity) as Popularity from BIT_DB.Spotifydata
+GROUP BY artist_name
+ORDER BY Popularity desc
+LIMIT 10;
+
+/*Display artist, track name and length of longest song.*/
+SELECT artist_name AS artist, track_name as track, MAX(duration_ms) as length FROM BIT_DB.Spotifydata
+GROUP BY artist
+ORDER BY length desc
+LIMIT 1;
+
+/*Display the 10 shortest longs in duration.*/
+SELECT track_name, duration_ms, artist_name FROM BIT_DB.Spotifydata
+GROUP BY track_name
+ORDER BY duration_ms asc
+LIMIT 10;
+
+/*Display the average popularity, danceability, and energy of artists having multiple songs in the database.*/
+SELECT COUNT(track_name) as num_songs, artist_name, ROUND(AVG(popularity), 2) as avg_pop, ROUND(AVG(danceability), 2) as avg_dance, ROUND(AVG(energy), 2) as avg_energy FROM BIT_DB.Spotifydata
+GROUP BY artist_name
+HAVING num_songs >=2
+ORDER BY avg_pop;
+
