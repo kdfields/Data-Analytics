@@ -57,3 +57,27 @@ GROUP BY artist_name
 HAVING num_songs >=2
 ORDER BY avg_pop;
 
+# For this query, I used a CTE to calculate the average popularity of each artist using the Spotify data.
+
+/*Display the artist, average popularity, and a Top Star tag for those artists with a popularity of at least 90.*/
+WITH avg_pop_CTE AS (
+SELECT Spotifydata.artist_name, avg(Spotifydata.popularity) as avg_popularity FROM Spotifydata
+Group by Spotifydata.artist_name
+ORDER by avg_popularity desc
+)
+SELECT artist_name, avg_popularity, "Top Star" AS TAG
+FROM aVG_pop_CTE
+WHERE avg_popularity >= 90;
+
+/*Display the results above not using a CTE in the query.*/
+SELECT s.artist_name, avg(s.popularity),
+    CASE 
+    WHEN avg(s.popularity) >=90 THEN "Top Star"
+    ELSE "Star"
+    END AS "TAG"
+    FROM Spotifydata as s
+    Group BY s.artist_name
+    Order BY avg(s.popularity) desc
+    LIMIT 10;
+    
+
