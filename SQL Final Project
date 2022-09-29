@@ -1,0 +1,143 @@
+select 
+CustomerID,
+FirstName,
+LastName, 
+Country 
+from chinook.customers
+where Country != 'US'
+;
+
+select
+FirstName,
+LastName,
+Country
+from chinook.customers
+where Country = 'Brazil'
+;
+
+select
+c.FirstName, 
+c.LastName,
+i.InvoiceId,
+i.InvoiceDate,
+i.BillingCountry
+from chinook.customers c
+inner join chinook.invoices i
+on c.CustomerId = i.CustomerId
+where c.Country = 'Brazil'
+;
+
+select 
+*
+from chinook.employees
+where Title = 'Sales Support Agent'
+;
+
+select 
+BillingCountry
+from chinook.Invoices
+where BillingCountry IN('Chile','Brazil','Argentina')
+group by BillingCountry
+;
+
+select
+e.LastName, 
+e.FirstName,
+i.InvoiceId
+from chinook.employees e
+inner join chinook.customers c
+on e.EmployeeId = c.SupportRepId
+inner join chinook.invoices i
+on c.CustomerId = i.CustomerId
+;
+
+select
+i.total,
+c.LastName as 'CustomerLN',
+c.FirstName as 'CustomerFN',
+c.country,
+e.LastName as 'AgentLN',
+e.FirstName as 'AgentFN'
+from chinook.invoices i
+inner join chinook.customers c
+on i.CustomerId = c.CustomerId
+inner join chinook.employees e
+on c.SupportRepId = e.EmployeeId
+;
+
+select
+COUNT(*)
+from chinook.invoices
+where InvoiceDate BETWEEN '2009-01-01' AND '2009-12-31'
+;
+
+select
+ROUND(SUM(Total),2) as '2009_Total Sales'
+from chinook.invoices
+where InvoiceDate BETWEEN '2009-01-01' and '2009-12-31'
+;
+
+select
+t.name,
+i.InvoiceLineId
+from chinook.tracks t
+inner join chinook.invoice_items i
+on t.TrackId = i.TrackId
+;
+
+select
+t.name as 'Track',
+a.name as 'Artist',
+i.InvoiceLineId
+from chinook.tracks t
+inner join chinook.invoice_items i
+on t.TrackId = i.TrackId
+inner join chinook.albums alb
+on t.AlbumId = alb.AlbumId
+inner join chinook.artists a
+on alb.ArtistId = a.ArtistId
+order by Artist
+;
+
+select
+t.Name, 
+alb.Title,
+m.name as 'Media Type',
+g.name as 'Genre'
+from chinook.tracks t
+inner join chinook.albums alb
+on t.AlbumId = alb.AlbumId
+inner join chinook.media_types m
+on t.MediaTypeId = m.MediaTypeId
+inner join chinook.genres g
+on t.GenreId = g.GenreId
+;
+
+select
+e.LastName as 'Last Name',
+e.FirstName as 'First Name',
+round(sum(i.total), 2) as 'Total Sales'
+from chinook.invoices i
+inner join chinook.customers c
+on i.CustomerId = c.CustomerId
+inner join chinook.employees e
+on c.SupportRepId = e.EmployeeId
+where e.Title like 'Sales%Agent'
+group by e.LastName
+;
+
+select
+e.LastName as 'Last Name',
+e.FirstName as 'First Name',
+round(sum(i.total), 2) as 'Total Sales'
+from chinook.invoices i
+inner join chinook.customers c
+on i.CustomerId = c.CustomerId
+inner join chinook.employees e
+on c.SupportRepId = e.EmployeeId
+where e.Title like 'Sales%Agent' AND i.InvoiceDate between '2009-00-00' and '2009-12-31'
+group by e.LastName
+order by sum(i.total) desc
+limit 1
+;
+
